@@ -31,7 +31,7 @@ class MainApp(QApplication):
             print("Main window is not loaded.")
             sys.exit(-1)
         
-        # Example of binding widgets to class attributes
+        # Binding widgets to class attributes | Create tab
         self.create_btn = self.main_window.findChild(QPushButton, "create_btn")
         self.input_eft_machine = self.main_window.findChild(QComboBox, "input_eft_machine")
         self.input_test_order_no = self.main_window.findChild(QLineEdit, "input_test_order_no")
@@ -45,8 +45,28 @@ class MainApp(QApplication):
         self.input_quantity = self.main_window.findChild(QLineEdit, "input_quantity")
         self.input_sample_date = self.main_window.findChild(QLineEdit, "input_sample_date")
         self.input_remark = self.main_window.findChild(QPlainTextEdit, "input_remark")
-        self.information_text = self.main_window.findChild(QTextEdit, "information_text")
+        self.start_test_btn_1 = self.main_window.findChild(QPushButton, "start_test_btn_1")
+        self.information_log = self.main_window.findChild(QTextEdit, "information_log")
         self.progress_bar = self.main_window.findChild(QProgressBar, "progress_bar")
+        
+        # Binding widgets to class attributes | Load test tab
+        
+        self.load_eft_machine = self.main_window.findChild(QComboBox, "load_eft_machine")
+        self.load_test_order_no = self.main_window.findChild(QComboBox, "load_test_order_no")
+        self.load_charge_no = self.main_window.findChild(QComboBox, "load_charge_no")   
+        self.load_task_name = self.main_window.findChild(QComboBox, "load_task_name")
+        self.load_element_type = self.main_window.findChild(QComboBox, "load_element_type")
+        self.load_line = self.main_window.findChild(QComboBox, "load_line")
+        self.load_process = self.main_window.findChild(QComboBox, "load_process")
+        self.load_axis = self.main_window.findChild(QComboBox, "load_axis")
+        self.load_requester = self.main_window.findChild(QComboBox, "load_requester")
+        self.load_quantity = self.main_window.findChild(QLineEdit, "load_quantity")
+        self.load_sample_date = self.main_window.findChild(QLineEdit, "load_sample_date")
+        self.load_remark = self.main_window.findChild(QPlainTextEdit, "load_remark")
+        self.load_test_file = self.main_window.findChild(QLineEdit, "load_test_file")
+        self.browse_btn = self.main_window.findChild(QPushButton, "browse_btn")
+        self.start_test_btn_2 = self.main_window.findChild(QPushButton, "start_test_btn_2")
+        
         
         # self.label = self.main_window.findChild(QLabel, "myLabel")
         # Add more widget bindings as needed
