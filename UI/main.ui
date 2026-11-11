@@ -6,17 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>956</width>
-    <height>600</height>
+    <width>960</width>
+    <height>621</height>
    </rect>
   </property>
   <property name="minimumSize">
-   <size>
-    <width>956</width>
-    <height>600</height>
-   </size>
-  </property>
-  <property name="maximumSize">
    <size>
     <width>956</width>
     <height>600</height>
@@ -55,49 +49,30 @@ qproperty-alignment: 'AlignCenter';
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>438</y>
-      <width>951</width>
+      <y>458</y>
+      <width>731</width>
       <height>111</height>
      </rect>
     </property>
     <property name="title">
      <string>Information</string>
     </property>
-    <widget class="QTextEdit" name="information_text">
+    <widget class="QTextEdit" name="information_log">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>931</width>
+       <width>711</width>
        <height>81</height>
       </rect>
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>770</x>
-      <y>0</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>UI/Bosch-Logo.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>550</y>
+      <y>570</y>
       <width>951</width>
       <height>31</height>
      </rect>
@@ -110,8 +85,8 @@ qproperty-alignment: 'AlignCenter';
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>30</y>
-      <width>951</width>
+      <y>50</y>
+      <width>731</width>
       <height>411</height>
      </rect>
     </property>
@@ -655,30 +630,7 @@ qproperty-alignment: 'AlignCenter';
        </rect>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>0</y>
-        <width>221</width>
-        <height>381</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Test Information</string>
-      </property>
-      <widget class="QPlainTextEdit" name="plainTextEdit_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>201</width>
-         <height>351</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="create_btn_3">
+     <widget class="QPushButton" name="start_test_btn_1">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -696,7 +648,7 @@ qproperty-alignment: 'AlignCenter';
      <attribute name="title">
       <string>Load test</string>
      </attribute>
-     <widget class="QComboBox" name="input_task_name_5">
+     <widget class="QComboBox" name="load_task_name">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -731,7 +683,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </item>
      </widget>
-     <widget class="QPlainTextEdit" name="input_remark_5">
+     <widget class="QPlainTextEdit" name="load_remark">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -777,7 +729,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Line</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_quantity_3">
+     <widget class="QLineEdit" name="load_quantity">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -841,7 +793,7 @@ qproperty-alignment: 'AlignCenter';
        <string>EFT Machine</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_test_order_no_9">
+     <widget class="QLineEdit" name="load_test_order_no">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -851,7 +803,7 @@ qproperty-alignment: 'AlignCenter';
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="input_eft_machine_3">
+     <widget class="QComboBox" name="load_eft_machine">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -879,7 +831,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </item>
      </widget>
-     <widget class="QComboBox" name="input_element_type_5">
+     <widget class="QComboBox" name="load_element_type">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -924,7 +876,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </item>
      </widget>
-     <widget class="QComboBox" name="input_requester_3">
+     <widget class="QComboBox" name="load_requester">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -997,30 +949,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Axis</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox_8">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>0</y>
-        <width>221</width>
-        <height>381</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Test Information</string>
-      </property>
-      <widget class="QPlainTextEdit" name="plainTextEdit_5">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>201</width>
-         <height>351</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="create_btn_7">
+     <widget class="QPushButton" name="start_test_btn_2">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -1051,7 +980,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Quantity</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="create_btn_8">
+     <widget class="QPushButton" name="browse_btn">
       <property name="geometry">
        <rect>
         <x>670</x>
@@ -1085,7 +1014,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Process</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_sample_date_3">
+     <widget class="QLineEdit" name="load_sample_date">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -1113,7 +1042,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Remark</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="input_process_3">
+     <widget class="QComboBox" name="load_process">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1161,7 +1090,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Test Order No.</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_charge_no_5">
+     <widget class="QLineEdit" name="load_charge_no">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1171,7 +1100,7 @@ qproperty-alignment: 'AlignCenter';
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="input_axis_3">
+     <widget class="QComboBox" name="load_axis">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -1191,7 +1120,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </item>
      </widget>
-     <widget class="QComboBox" name="input_line_3">
+     <widget class="QComboBox" name="load_line">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1280,7 +1209,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Load Test</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_sample_date_4">
+     <widget class="QLineEdit" name="load_test_file">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -1317,7 +1246,7 @@ qproperty-alignment: 'AlignCenter';
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="create_btn_9">
+      <widget class="QPushButton" name="close_btn">
        <property name="geometry">
         <rect>
          <x>290</x>
@@ -1330,7 +1259,7 @@ qproperty-alignment: 'AlignCenter';
         <string>Close</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="create_btn_10">
+      <widget class="QPushButton" name="finish_btn">
        <property name="geometry">
         <rect>
          <x>370</x>
@@ -1340,30 +1269,7 @@ qproperty-alignment: 'AlignCenter';
         </rect>
        </property>
        <property name="text">
-        <string>Finshed</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>0</y>
-        <width>221</width>
-        <height>381</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Test Information</string>
-      </property>
-      <widget class="QPlainTextEdit" name="plainTextEdit">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>201</width>
-         <height>351</height>
-        </rect>
+        <string>Finished</string>
        </property>
       </widget>
      </widget>
@@ -1421,7 +1327,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Remark</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="input_task_name_2">
+     <widget class="QComboBox" name="failure">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1441,7 +1347,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </item>
      </widget>
-     <widget class="QLineEdit" name="input_test_order_no_2">
+     <widget class="QLineEdit" name="force_setting">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1451,7 +1357,7 @@ qproperty-alignment: 'AlignCenter';
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="input_element_type_2">
+     <widget class="QComboBox" name="input_person">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1550,7 +1456,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Result</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_charge_no_2">
+     <widget class="QLineEdit" name="result">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1560,7 +1466,7 @@ qproperty-alignment: 'AlignCenter';
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="create_btn_2">
+     <widget class="QPushButton" name="submit_btn">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -1573,7 +1479,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Submit</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_test_order_no_3">
+     <widget class="QLineEdit" name="cycles">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1593,7 +1499,7 @@ qproperty-alignment: 'AlignCenter';
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_test_order_no_4">
+     <widget class="QLineEdit" name="element_no">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -1629,12 +1535,84 @@ qproperty-alignment: 'AlignCenter';
      <attribute name="title">
       <string>Data</string>
      </attribute>
+     <widget class="QLabel" name="label_66">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Charge No.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_64">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Test Order No.</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="input_test_order_no_2">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>10</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="input_charge_no_2">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>60</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="search_btn">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>100</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Search</string>
+      </property>
+      <property name="icon">
+       <iconset theme="system-search"/>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QLabel" name="label_22">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>290</x>
       <y>0</y>
       <width>41</width>
       <height>51</height>
@@ -1645,6 +1623,103 @@ qproperty-alignment: 'AlignCenter';
     </property>
     <property name="pixmap">
      <pixmap>UI/ICO.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>50</y>
+      <width>231</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="Information_tab">
+     <attribute name="title">
+      <string>Information</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_9">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>221</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Test Information</string>
+      </property>
+      <widget class="QPlainTextEdit" name="information_test">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>201</width>
+         <height>341</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Monitor_tab">
+     <attribute name="title">
+      <string>Monitor</string>
+     </attribute>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="change_user_btn">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>470</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change User</string>
+    </property>
+    <property name="icon">
+     <iconset theme="user-available"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="admin_btn">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>520</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Administrator</string>
+    </property>
+    <property name="icon">
+     <iconset theme="media-flash"/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>0</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>UI/Bosch-Logo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
