@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!-- EFT Machine: Danh sách máy -->
+    <EFTMachines>
+        <Item>V-02</Item>
+        <Item>V-03</Item>
+        <Item>V-07</Item>
+    </EFTMachines>
+
+    <!-- Task Name -->
+    <TaskNames>
+        <Item>Production Control</Item>
+        <Item>8D Problem Solving</Item>
+        <Item>Project Release</Item>
+        <Item>Object Release</Item>
+        <Item>Safe Launch</Item>
+    </TaskNames>
+
+    <!-- Element Type -->
+    <ElementTypes>
+        <Item>24-6</Item>
+        <Item>24-9</Item>
+        <Item>24-9AVO</Item>
+        <Item>28-10</Item>
+        <Item>28-12</Item>
+        <Item>30-10</Item>
+        <Item>30-12</Item>
+    </ElementTypes>
+
+    <!-- Line -->
+    <Lines>
+        <Item>EL4_0433</Item>
+        <Item>EL5_2192</Item>
+        <Item>EL6_3660</Item>
+        <Item>EL7_6911</Item>
+        <Item>EL8_7805</Item>
+    </Lines>
+
+    <!-- Process -->
+    <Processes>
+        <Item>After H园enning</Item>
+        <Item>After Deburring</Item>
+        <Item>After Body Drinding</Item>
+        <Item>After EOL Washing</Item>
+    </Processes>
+
+    <!-- Axis -->
+    <Axes>
+        <Item>Y</Item>
+        <Item>Z</Item>
+    </Axes>
+
+    <!-- Requested by / Requester by -->
+    <RequestedBy>
+        <Item>MFG1</Item>
+        <Item>MFG2</Item>
+        <Item>MFG3</Item>
+        <Item>QMM1</Item>
+        <Item>QMM3</Item>
+        <Item>ETC2-VN</Item>
+        <Item>ETC-VN</Item>
+        <Item>Other</Item>
+    </RequestedBy>
+</Configuration>
