@@ -7,13 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>960</width>
-    <height>621</height>
+    <height>622</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>956</width>
     <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>960</width>
+    <height>622</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -91,7 +97,7 @@ qproperty-alignment: 'AlignCenter';
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <property name="iconSize">
      <size>
@@ -1236,7 +1242,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="title">
        <string>Result</string>
       </property>
-      <widget class="QTableView" name="tableView">
+      <widget class="QTableView" name="table_results">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1273,7 +1279,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </widget>
      </widget>
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="test_input_person">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1291,7 +1297,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Input person</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_16">
+     <widget class="QLabel" name="test_setting_N">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1309,7 +1315,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Setting (N)</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_17">
+     <widget class="QLabel" name="test_remark">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1402,7 +1408,7 @@ qproperty-alignment: 'AlignCenter';
        </property>
       </item>
      </widget>
-     <widget class="QLabel" name="label_19">
+     <widget class="QLabel" name="test_failure">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1420,7 +1426,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Failure</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_20">
+     <widget class="QLabel" name="test_cycles">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1438,7 +1444,7 @@ qproperty-alignment: 'AlignCenter';
        <string>Cycles (rpm)</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_21">
+     <widget class="QLabel" name="test_result">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1512,7 +1518,7 @@ qproperty-alignment: 'AlignCenter';
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_18">
+     <widget class="QLabel" name="test_element_no">
       <property name="geometry">
        <rect>
         <x>10</x>
