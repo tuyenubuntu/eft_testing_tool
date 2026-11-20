@@ -38,10 +38,11 @@
 
     <!-- Process -->
     <Processes>
-        <Item>After H园enning</Item>
+        <Item>After Hadenning</Item>
         <Item>After Deburring</Item>
         <Item>After Body Drinding</Item>
         <Item>After EOL Washing</Item>
+        <!-- <Item>After SOP</Item> -->
     </Processes>
 
     <!-- Axis -->
@@ -57,7 +58,9 @@
         <Item>MFG3</Item>
         <Item>QMM1</Item>
         <Item>QMM3</Item>
+        <Item>ETC1-VN</Item>
         <Item>ETC2-VN</Item>
+        <Item>ETC3-VN</Item>
         <Item>ETC-VN</Item>
         <Item>Other</Item>
     </RequestedBy>

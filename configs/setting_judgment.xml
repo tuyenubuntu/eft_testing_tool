@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setting_judgment>
+    <default_cycle>250000</default_cycle>
+    <adjust_force>20</adjust_force>
+</setting_judgment>

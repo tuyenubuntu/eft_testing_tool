@@ -5,7 +5,7 @@ a = Analysis(
     ['app.py'],
     pathex=[],
     binaries=[],
-    datas=[('UI', 'UI')],
+    datas=[('ui/Bosch-Logo.png', 'ui'), ('ui/ICO.png', 'ui'), ('ui/main.ui', 'ui')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -35,5 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['UI/ICO.png'],
+    icon=['ui/ICO.png'],
 )

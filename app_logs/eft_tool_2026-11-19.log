@@ -1,0 +1,19 @@
+[2026-11-19 12:25:13] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/12_24-6.json
+[2026-11-19 12:27:01] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/12_24-6.json
+[2026-11-19 12:28:11] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/12_24-6.json
+[2026-11-19 12:30:22] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/23_24-6.json
+[2026-11-19 12:36:34] [INFO] Started test: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/CTO12_24-6.json
+[2026-11-19 12:50:34] [INFO] Start: EFT Creating Tool
+[2026-11-19 12:50:46] [INFO] Start: EFT Creating Tool
+[2026-11-19 12:50:50] [WARNING] Missing Information:Please enter the Test Order No.!
+[2026-11-19 12:50:54] [WARNING] Missing Information:Please enter the Test Order No.!
+[2026-11-19 12:50:56] [WARNING] Missing Information:Please enter the Test Order No.!
+[2026-11-19 12:51:58] [INFO] Start: EFT Creating Tool
+[2026-11-19 12:52:15] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/23_24-6.json
+[2026-11-19 12:52:20] [INFO] Loaded test information
+[2026-11-19 12:52:20] [INFO] Created and started test: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/23_24-6.json
+[2026-11-19 14:17:39] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/23_24-6.json
+[2026-11-19 15:42:34] [INFO] Start: EFT Creating Tool
+[2026-11-19 15:43:50] [SUCCESS] Created test file: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/CTO1234345556_24-6.json
+[2026-11-19 15:44:15] [INFO] Loaded test information
+[2026-11-19 15:44:15] [INFO] Created and started test: C:/Users/RBU1HC/Documents/EFT_Creating_Tool/log/CTO1234345556_24-6.json

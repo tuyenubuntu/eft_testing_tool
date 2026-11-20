@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElementConfig>
+    <Element type="24-6">
+        <force>300</force>
+    </Element>
+    <Element type="24-9">
+        <force>300</force>
+    </Element>
+    <Element type="24-9AVO">
+        <force>300</force>
+    </Element>
+    <Element type="28-10">
+        <force>400</force>
+    </Element>
+    <Element type="28-12">
+        <force>400</force>
+    </Element>
+    <Element type="30-10">
+        <force>400</force>
+    </Element>
+    <Element type="30-12">
+        <force>400</force>
+    </Element>
+</ElementConfig>
