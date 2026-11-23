@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Machines_name>
+        <Item>V-07</Item>
+    </EFTMachines>
+
+    <PathConfig>
+        <ResultFiles>log</ResultFiles>
+    </PathConfig>
+
+</Configuration>

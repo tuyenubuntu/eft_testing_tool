@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>956</width>
-    <height>600</height>
+    <height>616</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1555,63 +1555,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="title">
        <string>Result</string>
       </property>
-      <widget class="QTableView" name="table_orders_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>50</y>
-         <width>701</width>
-         <height>321</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QDateEdit" name="date_from_2">
-       <property name="geometry">
-        <rect>
-         <x>340</x>
-         <y>20</y>
-         <width>126</width>
-         <height>26</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QDateEdit" name="date_to_2">
-       <property name="geometry">
-        <rect>
-         <x>500</x>
-         <y>20</y>
-         <width>126</width>
-         <height>26</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_18">
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>20</y>
-         <width>41</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>From</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_19">
-       <property name="geometry">
-        <rect>
-         <x>480</x>
-         <y>20</y>
-         <width>21</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>To</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="fillter_btn_2">
+      <widget class="QPushButton" name="load_config_btn">
        <property name="geometry">
         <rect>
          <x>630</x>
@@ -1622,6 +1566,44 @@ qproperty-alignment: 'AlignCenter';
        </property>
        <property name="text">
         <string>Fillter</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="input_eft_machine_2">
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>20</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">V-02</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>V-02</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>V-03</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>V-07</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QTableView" name="table_config">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>701</width>
+         <height>321</height>
+        </rect>
        </property>
       </widget>
      </widget>
@@ -1684,7 +1666,7 @@ qproperty-alignment: 'AlignCenter';
         </rect>
        </property>
       </widget>
-      <widget class="QLabel" name="label_11">
+      <widget class="QLabel" name="user_name">
        <property name="geometry">
         <rect>
          <x>20</x>

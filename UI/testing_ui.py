@@ -66,6 +66,7 @@ class TestingUI:
 
         # Disable the submit button until a valid element is loaded
         self.refresh_table()
+        print ("First refesh")
 
         # find the first element that has no result yet and load it into the form
         elements = self.test_data.get("elements", [])
@@ -157,7 +158,7 @@ class TestingUI:
                 return
 
             cycles_str = self.generalUI.cycles.text().strip()
-            result_str = self.generalUI.result.text().strip()
+            result_str = self.generalUI.result.text().strip() 
             current_force_str = self.generalUI.force_setting.text().strip()
 
             if not cycles_str or not result_str:
@@ -167,6 +168,8 @@ class TestingUI:
             if result_str == "Break" and not self.generalUI.failure.currentText().strip():
                 QMessageBox.warning(self.window, "Missing Data", "Element is broken, please select a Failure reason/position!")
                 return
+
+            
 
             # Step 1: Update the current element's data in self.test_data
             el = self.test_data["elements"][self.current_index]
@@ -180,6 +183,8 @@ class TestingUI:
             # Step 2: Save the updated test data back to the JSON file
             TestFileManager.save_test_json(self.json_path, self.test_data)
             self.refresh_table()
+            self.generalUI.update_test_information(self.test_data)
+            print("Test1")
 
             # Step 3: Move to the next element for testing
             next_index = self.current_index + 1
@@ -212,6 +217,17 @@ class TestingUI:
         self.test_data["test_info"]["status"] = "Finished"
         TestFileManager.save_test_json(self.json_path, self.test_data)
         QMessageBox.information(self.window, "Completed", "Test batch marked as finished!")
+        self.reset_testing_ui()
+        
+        # Optional: Log the closure of the test session in the information log if it exists
+        if hasattr(self.generalUI, "textEdit_Information") and self.generalUI.textEdit_Information:
+            self.generalUI.textEdit_Information.append("[INFO] Closed current test session.")
+
+        # # Switch the screen back to the Create tab (index 0) or Load test tab (index 1)
+        # if self.generalUI.tab_widget:
+        #     self.generalUI.tab_widget.setCurrentIndex(0)
+        self.generalUI.update_info_log(f"Finished: {self.generalUI.info.get('test_order_no', '')}")
+
 
     def reset_testing_ui(self):
         """Clear all input fields and reset the TestingUI state for a new session."""
@@ -248,6 +264,9 @@ class TestingUI:
         if self.generalUI.submit_btn:
             self.generalUI.submit_btn.setEnabled(True)
 
+        if self.generalUI.information_test:
+            self.generalUI.information_test.clear()
+
     def handle_close(self):
         """Close the current test session: clear data on the UI and return to the Create tab, without closing the app"""
         reply = QMessageBox.question(
@@ -263,6 +282,6 @@ class TestingUI:
             if hasattr(self.generalUI, "textEdit_Information") and self.generalUI.textEdit_Information:
                 self.generalUI.textEdit_Information.append("[INFO] Closed current test session.")
 
-            # Switch the screen back to the Create tab (index 0) or Load test tab (index 1)
-            if self.generalUI.tab_widget:
-                self.generalUI.tab_widget.setCurrentIndex(0)
+            # # Switch the screen back to the Create tab (index 0) or Load test tab (index 1)
+            # if self.generalUI.tab_widget:
+            #     self.generalUI.tab_widget.setCurrentIndex(0)

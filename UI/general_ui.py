@@ -5,6 +5,7 @@ import platform
 import threading
 import atexit
 import signal
+import getpass
 from typing import Optional, Set
 from PySide6.QtWidgets import QApplication,QTabWidget, QPushButton, QTabWidget, QPlainTextEdit,QWidget, QTableView, QTableWidget, QTableWidgetItem, QProgressBar, QTextEdit, QLabel, QMessageBox, QPlainTextEdit, QLineEdit, QDialog, QVBoxLayout, QComboBox
 from PySide6.QtUiTools import QUiLoader
@@ -22,9 +23,12 @@ class GeneralUI(QApplication):
         self.app = QApplication.instance() or QApplication(sys.argv)
         self.loader = QUiLoader()
         self.window = self.load_ui(ui_path)
+        self.user_online = getpass.getuser()
+        # print( self.user_online)
         self.bind_widgets()
         # self.window.setWindowFlags(Qt.FramelessWindowHint)
         self.window.setWindowTitle(window_title)
+        
         self.create_test_ui = CreateTestUI(self.window, self)
         self.load_test_ui = LoadTestUI(self.window, self)
         self.testing_ui = TestingUI(self.window, self)
@@ -63,6 +67,7 @@ class GeneralUI(QApplication):
         self.progress_bar = self.window.findChild(QProgressBar, "progress_bar")
         self.tab_widget = self.window.findChild(QTabWidget, "tabWidget")
         self.information_test = self.window.findChild(QPlainTextEdit, "information_test")
+        self.user_name = self.window.findChild(QLabel, "user_name")
         
         # Binding widgets to class attributes | Load test tab
         
@@ -106,8 +111,27 @@ class GeneralUI(QApplication):
         # self.label = self.window.findChild(QLabel, "myLabel")
         # Add more widget bindings as needed
         
-        if self.information_test:
-            self.information_test.setReadOnly(True)
+        
+        self.information_test.setReadOnly(True)
+        self.information_log.setReadOnly(True)
+
+        #Lock UI load test
+        self.load_eft_machine.setReadOnly(True)
+        self.load_test_order_no.setReadOnly(True)
+        self.load_charge_no.setReadOnly(True)  
+        self.load_task_name.setReadOnly(True)
+        self.load_element_type.setReadOnly(True)
+        self.load_line.setReadOnly(True)
+        self.load_process.setReadOnly(True)
+        self.load_axis.setReadOnly(True)
+        self.load_requester.setReadOnly(True)
+        self.load_quantity.setReadOnly(True)
+        self.load_sample_date.setReadOnly(True)
+        self.load_remark.setReadOnly(True)
+
+        if self.user_name:
+            self.user_name.setText(f"Online user: {self.user_online}" )
+            self.user_name.setStyleSheet("color: green;")
             
     def load_ui(self, ui_file_path):
         ui_file = QFile(ui_file_path)
@@ -127,35 +151,35 @@ class GeneralUI(QApplication):
             self.information_test.clear()
             return
 
-        info = test_data.get("test_info", {})
+        self.info = test_data.get("test_info", {})
         elements = test_data.get("elements", [])
         completed_count = sum(1 for el in elements if el.get("result"))
-        total_count = info.get("quantity", len(elements))
+        total_count = self.info.get("quantity", len(elements))
 
         # Format
-        summary_text = (
-            f"EFT Machine: {info.get('eft_machine', '')}\n"
-            f"Test Order No.: {info.get('test_order_no', '')}\n"
-            f"Charge No.: {info.get('charge_no', '')}\n"
-            f"Task Name: {info.get('task_name', '')}\n"
-            f"Element Type: {info.get('element_type', '')}\n"
-            f"Initial Force: {info.get('first_force_setting_n', '')} N\n"
-            f"Line: {info.get('line', '')}\n"
-            f"Process: {info.get('process', '')}\n"
-            f"Axis: {info.get('axis', '')}\n"
-            f"Requester: {info.get('requester_by', '')}\n"
-            f"Sample Date: {info.get('sample_date', '')}\n"
+        self.summary_text = (
+            f"EFT Machine: {self.info.get('eft_machine', '')}\n"
+            f"Test Order No.: {self.info.get('test_order_no', '')}\n"
+            f"Charge No.: {self.info.get('charge_no', '')}\n"
+            f"Task Name: {self.info.get('task_name', '')}\n"
+            f"Element Type: {self.info.get('element_type', '')}\n"
+            f"Initial Force: {self.info.get('first_force_setting_n', '')} N\n"
+            f"Line: {self.info.get('line', '')}\n"
+            f"Process: {self.info.get('process', '')}\n"
+            f"Axis: {self.info.get('axis', '')}\n"
+            f"Requester: {self.info.get('requester_by', '')}\n"
+            f"Sample Date: {self.info.get('sample_date', '')}\n"
             f"Progress: {completed_count} / {total_count}\n"
-            f"Status: {info.get('status', '')}\n"
-            f"Remark: {info.get('remark', '')}"
+            f"Status: {self.info.get('status', '')}\n"
+            f"Remark: {self.info.get('remark', '')}"
         )
 
         # Suport for all QTextEdit, QPlainTextEdit, QLabel
         if hasattr(self.information_test, "setPlainText"):
-            self.information_test.setPlainText(summary_text)
+            self.information_test.setPlainText(self.summary_text)
 
         elif hasattr(self.information_test, "setText"):
-            self.information_test.setText(summary_text)
+            self.information_test.setText(self.summary_text)
         self.update_info_log(f"Loaded test information", level="INFO")
 
     def update_info_log(self, message, level="INFO"):
@@ -202,5 +226,6 @@ class GeneralUI(QApplication):
     
     def run(self):
         self.update_info_log(f"Start: EFT Creating Tool", level="INFO")
+        self.update_info_log(f"User online: {self.user_online}", level="INFO")
         self.window.show()
         sys.exit(self.app.exec())

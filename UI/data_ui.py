@@ -128,6 +128,9 @@ class DataUI:
         if hasattr(self, "table_model") and self.table_model:
             self.table_model.setRowCount(0)
 
+        if self.generalUI.information_test:
+            self.generalUI.information_test.clear()
+
     def handle_close(self):
         """Close the current test session: clear data on the UI and return to the Create tab, without closing the app"""
         reply = QMessageBox.question(
