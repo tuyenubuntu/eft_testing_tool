@@ -15,8 +15,11 @@ from ui.create_test_ui import CreateTestUI
 from ui.load_test_ui import LoadTestUI
 from ui.testing_ui import TestingUI
 from ui.data_ui import DataUI
+from ui.accountmanager_ui import AccountManagerUI
 from services.config_reader import ConfigReader
 from services.log_services import LogServices
+from services.security_service import SecurityService
+
 
 class GeneralUI(QApplication):
     def __init__(self, ui_path="ui/general.ui", icon_path="ui/ICO.png", window_title="EFT-TESTING TOOL"):
@@ -25,6 +28,8 @@ class GeneralUI(QApplication):
         self.window = self.load_ui(ui_path)
         self.user_online = getpass.getuser()
         # print( self.user_online)
+        self.security = SecurityService("configs/security/users.json")
+        self.account_manager = AccountManagerUI(self.window, self)
         self.bind_widgets()
         # self.window.setWindowFlags(Qt.FramelessWindowHint)
         self.window.setWindowTitle(window_title)
@@ -34,6 +39,8 @@ class GeneralUI(QApplication):
         self.testing_ui = TestingUI(self.window, self)
         self.data_ui = DataUI(self.window, self)
         self.log_services = LogServices(save_to_file=True)
+        
+        
         
           # Bind widgets after the UI is loaded
         
@@ -68,6 +75,8 @@ class GeneralUI(QApplication):
         self.tab_widget = self.window.findChild(QTabWidget, "tabWidget")
         self.information_test = self.window.findChild(QPlainTextEdit, "information_test")
         self.user_name = self.window.findChild(QLabel, "user_name")
+        self.change_user_btn = self.window.findChild(QPushButton, "change_user_btn")
+        self.admin_btn = self.window.findChild(QPushButton, "admin_btn")
         
         # Binding widgets to class attributes | Load test tab
         
@@ -108,6 +117,14 @@ class GeneralUI(QApplication):
         self.close_btn_2 = self.window.findChild(QPushButton, "close_btn_2")
         self.finish_btn_2 = self.window.findChild(QPushButton, "finish_btn_2")
 
+        #Widget
+        self.create_tab           = self.window.findChild(QWidget, "create_tab") #0
+        self.load_tab           = self.window.findChild(QWidget, "load_tab") #1
+        self.testing_tab           = self.window.findChild(QWidget, "testing_tab") #2
+        self.data_tab           = self.window.findChild(QWidget, "data_tab") #3
+        self.test_order_tab           = self.window.findChild(QWidget, "test_order_tab") #4
+        self.configuration_tab           = self.window.findChild(QWidget, "configuration_tab") #5
+
         # self.label = self.window.findChild(QLabel, "myLabel")
         # Add more widget bindings as needed
         
@@ -129,9 +146,16 @@ class GeneralUI(QApplication):
         self.load_sample_date.setReadOnly(True)
         self.load_remark.setReadOnly(True)
 
+        self.tab_widget.setTabEnabled(5, False)
+
         if self.user_name:
             self.user_name.setText(f"Online user: {self.user_online}" )
             self.user_name.setStyleSheet("color: green;")
+
+        if self.change_user_btn:
+            self.change_user_btn.clicked.connect(self.account_manager.open_general_login)
+        if self.admin_btn:
+            self.admin_btn.clicked.connect(self.account_manager.open_login_then_admin)
             
     def load_ui(self, ui_file_path):
         ui_file = QFile(ui_file_path)
@@ -141,6 +165,29 @@ class GeneralUI(QApplication):
         return ui
         
         return self.window
+
+        # --- role-based permission for any tab ---
+    def _apply_tab_permission(self, role: str, user: str):
+        # self.generalUI.tab_widget
+        # if self.idx_cam < 0 or not self.tab:
+        #     return
+        # self.enable_role = (role != "operator")
+        # # If the role is restricted and the user is on the cam/monitor tab -> switch to inspection
+        # if not self.enable_role and self.tab.currentIndex() in (self.idx_cam, self.idx_test, self.idx_monitor, self.idx_setting):
+        #     if self.idx_ins >= 0:
+        #         self.tab.setCurrentIndex(self.idx_ins)
+        # # Update enable/disable for tab
+        # if self.window and not self.window.isHidden():
+        #     self.tab.setTabEnabled(self.idx_cam, self.enable_role)
+        #     self.tab.setTabEnabled(self.idx_monitor, self.enable_role)
+        #     self.tab.setTabEnabled(self.idx_test, self.enable_role)
+        #     # self.tab.setTabEnabled(self.idx_setting, self.enable_role)
+        if role == "administrator" and user == "administrator":
+            self.tab_widget.setTabEnabled(5, True)
+        else:
+            self.tab_widget.setTabEnabled(5, False)
+            self.tab_widget.setCurrentIndex(0)
+
     
     def update_test_information(self, test_data):
         """Định dạng và hiển thị thông tin lô test lên khung Test Information bên phải"""

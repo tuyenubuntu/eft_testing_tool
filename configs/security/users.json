@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "users": [
+    {
+      "username": "etc_vn",
+      "role": "administrator",
+      "password": "etc_vn"
+    },
+    {
+      "username": "administrator",
+      "role": "administrator",
+      "password": "etc_vn"
+    },
+    {
+      "username": "operator",
+      "role": "operator",
+      "password": ""
+    }
+  ]
+}
