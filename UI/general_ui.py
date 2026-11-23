@@ -150,7 +150,7 @@ class GeneralUI(QApplication):
             f"Remark: {info.get('remark', '')}"
         )
 
-        # Hỗ trợ cả QTextEdit, QPlainTextEdit lẫn QLabel
+        # Suport for all QTextEdit, QPlainTextEdit, QLabel
         if hasattr(self.information_test, "setPlainText"):
             self.information_test.setPlainText(summary_text)
 
@@ -170,7 +170,7 @@ class GeneralUI(QApplication):
             print(plain_text)
             return
 
-        # Hỗ trợ QTextEdit (hiển thị có màu) hoặc QPlainTextEdit (chữ thường)
+        # Support
         if hasattr(self.information_log, "appendHtml"):
             # QPlainTextEdit
             self.information_log.appendHtml(html_text)
@@ -178,7 +178,7 @@ class GeneralUI(QApplication):
             # QTextEdit
             self.information_log.append(html_text)
 
-        # Tự động cuộn xuống dòng log mới nhất
+        # Auto roll ResourceWarning
         self.information_log.moveCursor(QTextCursor.End)
     
     def set_window_icon(self, icon_path):

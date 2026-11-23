@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>622</height>
+    <width>956</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1310,9 +1310,9 @@ qproperty-alignment: 'AlignCenter';
      <widget class="QPushButton" name="submit_btn">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>130</x>
         <y>340</y>
-        <width>151</width>
+        <width>121</width>
         <height>41</height>
        </rect>
       </property>
@@ -1371,6 +1371,19 @@ qproperty-alignment: 'AlignCenter';
        <string>Element No.</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="get_cycles_btn">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>340</y>
+        <width>121</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Get cycles</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Data_base">
      <attribute name="title">
@@ -1392,17 +1405,17 @@ qproperty-alignment: 'AlignCenter';
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>50</y>
          <width>701</width>
-         <height>311</height>
+         <height>321</height>
         </rect>
        </property>
       </widget>
       <widget class="QPushButton" name="close_btn_2">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>330</y>
+         <x>470</x>
+         <y>10</y>
          <width>81</width>
          <height>41</height>
         </rect>
@@ -1414,8 +1427,8 @@ qproperty-alignment: 'AlignCenter';
       <widget class="QPushButton" name="finish_btn_2">
        <property name="geometry">
         <rect>
-         <x>370</x>
-         <y>330</y>
+         <x>550</x>
+         <y>10</y>
          <width>81</width>
          <height>41</height>
         </rect>
@@ -1427,8 +1440,8 @@ qproperty-alignment: 'AlignCenter';
       <widget class="QPushButton" name="finish_btn_3">
        <property name="geometry">
         <rect>
-         <x>450</x>
-         <y>330</y>
+         <x>630</x>
+         <y>10</y>
          <width>81</width>
          <height>41</height>
         </rect>
@@ -1455,53 +1468,73 @@ qproperty-alignment: 'AlignCenter';
       <property name="title">
        <string>Result</string>
       </property>
-      <widget class="QTableView" name="table_results_3">
+      <widget class="QTableView" name="table_orders">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>50</y>
          <width>701</width>
-         <height>311</height>
+         <height>321</height>
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="close_btn_3">
+      <widget class="QDateEdit" name="date_from">
        <property name="geometry">
         <rect>
-         <x>290</x>
-         <y>330</y>
+         <x>340</x>
+         <y>20</y>
+         <width>126</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="date_to">
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>20</y>
+         <width>126</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_16">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>From</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>20</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>To</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="fillter_btn">
+       <property name="geometry">
+        <rect>
+         <x>630</x>
+         <y>10</y>
          <width>81</width>
          <height>41</height>
         </rect>
        </property>
        <property name="text">
-        <string>Close</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="finish_btn_4">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>330</y>
-         <width>81</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Analysis</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="finish_btn_5">
-       <property name="geometry">
-        <rect>
-         <x>450</x>
-         <y>330</y>
-         <width>81</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Export</string>
+        <string>Fillter</string>
        </property>
       </widget>
      </widget>
@@ -1510,6 +1543,88 @@ qproperty-alignment: 'AlignCenter';
      <attribute name="title">
       <string>Configuration</string>
      </attribute>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>721</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Result</string>
+      </property>
+      <widget class="QTableView" name="table_orders_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>701</width>
+         <height>321</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="date_from_2">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>20</y>
+         <width>126</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="date_to_2">
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>20</y>
+         <width>126</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_18">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>20</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>From</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_19">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>20</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>To</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="fillter_btn_2">
+       <property name="geometry">
+        <rect>
+         <x>630</x>
+         <y>10</y>
+         <width>81</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Fillter</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
    <widget class="QLabel" name="label_22">
@@ -1565,8 +1680,21 @@ qproperty-alignment: 'AlignCenter';
          <x>10</x>
          <y>20</y>
          <width>201</width>
-         <height>351</height>
+         <height>311</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>340</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
        </property>
       </widget>
      </widget>
