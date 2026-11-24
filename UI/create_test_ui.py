@@ -1,11 +1,6 @@
-import threading
 import os
-import numpy as np
 from datetime import datetime
-from PySide6.QtCore import QObject, Signal, QTimer, QIODevice
-from PySide6.QtGui import QPixmap, QImage, QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QComboBox, QTextEdit, QPushButton, QLabel, QTableWidget, QTableWidgetItem, QApplication, QWidget, QFileDialog, QMessageBox
-from PySide6.QtWidgets import QComboBox, QTextEdit, QPushButton, QLabel, QTableWidget, QTableWidgetItem, QApplication, QWidget, QFileDialog, QMessageBox
+from PySide6.QtWidgets import QWidget, QFileDialog, QMessageBox
 
 from services.config_reader import ConfigReader
 from services.test_file_manager import TestFileManager
@@ -17,17 +12,15 @@ class CreateTestUI:
         self.config_reader = ConfigReader()
         self.test_file_manager = TestFileManager()
         self.generalUI = generalUI
-        
-        # self.generalUI.bind_widgets()  # Bind widgets after the UI is loaded
-        self.widget_init()             # Initialize widgets with configuration data
+
+        self.widget_init()
 
     def widget_init(self):
         """
-        Khởi tạo các ComboBox với dữ liệu từ file cấu hình và kết nối sự kiện nút bấm. 
+        Initialize ComboBoxes with configuration data and connect button signals.
         """
         configs = self.config_reader.get_general_configs()
 
-        # Initialize ComboBoxes in the "Create" tab
         self.generalUI.input_eft_machine.clear()
         self.generalUI.input_task_name.clear()
         self.generalUI.input_element_type.clear()
@@ -44,88 +37,129 @@ class CreateTestUI:
         self.generalUI.input_axis.addItems(configs["axes"])
         self.generalUI.input_requester.addItems(configs["requested_by"])
 
-        # Connect button event
+        # Pre-fill current date for Sample Date if the field is empty
+        if not self.generalUI.input_sample_date.text().strip():
+            self.generalUI.input_sample_date.setText(datetime.now().strftime("%d/%m/%Y"))
+
         self.generalUI.create_btn.clicked.connect(self.handle_create_file)
         self.generalUI.start_test_btn_1.clicked.connect(self.handle_start_testing)
 
+    def _parse_sample_date(self, date_str):
+        """
+        Parse common date formats (dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd, yymmdd)
+        and return (year_yyyy, yymmdd).
+        """
+        formats = ["%d/%m/%Y", "%d-%m-%Y", "%Y-%m-%d", "%Y/%m/%d", "%d/%m/%y", "%y%m%d"]
+        for fmt in formats:
+            try:
+                dt = datetime.strptime(date_str, fmt)
+                return dt.strftime("%Y"), dt.strftime("%y%m%d")
+            except ValueError:
+                continue
+        return None, None
+
     def build_and_save_json(self):
         """
-        Thu thập dữ liệu trên tab Create, mở hộp thoại lưu file JSON và trả về (save_path, test_data).
+        Validate required fields, build year-based folder structure and standard filename,
+        and save the JSON test file.
         """
-        path = self.config_reader.get_path_configs()
+        path_cfg = self.config_reader.get_path_configs()
 
-        # 1. Collect 
+        # 1. Collect UI inputs
         test_order_no = self.generalUI.input_test_order_no.text().strip()
+        charge_no = self.generalUI.input_charge_no.text().strip()
         quantity_text = self.generalUI.input_quantity.text().strip()
+        sample_date = self.generalUI.input_sample_date.text().strip()
 
-        if not test_order_no:
-            QMessageBox.warning(self.window, "Missing Information", "Please enter the Test Order No.!")
-            self.generalUI.update_info_log(f"Missing Information:" "Please enter the Test Order No.!", level="WARNING")
+        # 2. Validate REQUIRED fields: Charge No., Quantity, Sample Date
+        if not charge_no:
+            QMessageBox.warning(self.window, "Missing Information", "Please enter the Charge No.!")
+            self.generalUI.update_info_log("Missing Information: Please enter the Charge No.!", level="WARNING")
             return None, None
 
         if not quantity_text.isdigit() or int(quantity_text) <= 0:
             QMessageBox.warning(self.window, "Invalid Format", "Quantity must be an integer greater than 0!")
-            self.generalUI.update_info_log(f"Invalid Format:" "Quantity must be an integer greater than 0!", level="WARNING")
+            self.generalUI.update_info_log("Invalid Format: Quantity must be an integer greater than 0!", level="WARNING")
             return None, None
 
-        element_type = self.generalUI.input_element_type.currentText()
+        if not sample_date:
+            QMessageBox.warning(self.window, "Missing Information", "Please enter the Sample Date!")
+            self.generalUI.update_info_log("Missing Information: Please enter the Sample Date!", level="WARNING")
+            return None, None
+
+        year_yyyy, yymmdd = self._parse_sample_date(sample_date)
+        if not year_yyyy or not yymmdd:
+            QMessageBox.warning(
+                self.window,
+                "Invalid Date Format",
+                "Sample Date format is invalid! Please use dd/mm/yyyy (e.g., 24/11/2026) or yymmdd."
+            )
+            self.generalUI.update_info_log(f"Invalid Sample Date format: {sample_date}", level="WARNING")
+            return None, None
+
+        element_type = self.generalUI.input_element_type.currentText().strip()
+        line = self.generalUI.input_line.currentText().strip()
 
         info_data = {
             "eft_machine": self.generalUI.input_eft_machine.currentText(),
-            "test_order_no": test_order_no,
-            "charge_no": self.generalUI.input_charge_no.text().strip(),
+            "test_order_no": test_order_no,  # Optional field
+            "charge_no": charge_no,
             "task_name": self.generalUI.input_task_name.currentText(),
             "element_type": element_type,
-            "line": self.generalUI.input_line.currentText(),
+            "line": line,
             "process": self.generalUI.input_process.currentText(),
             "axis": self.generalUI.input_axis.currentText(),
             "requester_by": self.generalUI.input_requester.currentText(),
             "quantity": int(quantity_text),
-            "sample_date": self.generalUI.input_sample_date.text().strip(),
+            "sample_date": sample_date,
             "remark": self.generalUI.input_remark.toPlainText().strip()
         }
 
-        # 2. add default force setting based on element type
+        # 3. Get default force setting (N) from element_config.xml
         default_force = self.config_reader.get_force_by_element(element_type) or ""
 
-        # 3. Open a file dialog to select the save path for the JSON file
-        default_dir = path.get("TestFiles", "")
-        if default_dir:
-            os.makedirs(default_dir, exist_ok=True)
-            
-        default_filename = f"{test_order_no}_{element_type}.json"
+        # 4. Generate base name depending on whether Test Order No. is provided
+        # - Without Order No.: yymmddChargeNo_Elementtype_Line
+        # - With Order No.: OrderNoyymmddChargeNo_Elementtype_Line
+        if test_order_no:
+            base_name = f"{test_order_no}{yymmdd}{charge_no}_{element_type}_{line}"
+        else:
+            base_name = f"{yymmdd}{charge_no}_{element_type}_{line}"
+
+        # 5. Build target directory path: <TestFiles>/<YYYY>/<base_name>/
+        root_dir = path_cfg.get("TestFiles", "")
+        target_dir = os.path.join(root_dir, year_yyyy, base_name)
+        os.makedirs(target_dir, exist_ok=True)
+
+        default_filename = f"{base_name}.json"
         save_path, _ = QFileDialog.getSaveFileName(
             self.window,
-            "Lưu file test",
-            os.path.join(default_dir, default_filename),
+            "Save Test File",
+            os.path.join(target_dir, default_filename),
             "JSON Files (*.json)"
         )
 
         if not save_path:
-            return None, None  # Push cancel button
+            return None, None  # User canceled the save dialog
 
-        # 4. record
+        # 6. Save JSON file and reload the created data
         try:
             self.test_file_manager.create_test_json(save_path, info_data, default_setting_n=default_force)
             test_data = self.test_file_manager.load_test_json(save_path)
 
-            # Save path
             self.generalUI.current_json_path = save_path
             self.generalUI.current_test_data = test_data
-
-            if hasattr(self.generalUI, "textEdit_Information"):
-                self.generalUI.textEdit_Information.append(f"[OK] Created file successfully: {save_path}")
 
             return save_path, test_data
 
         except Exception as e:
             QMessageBox.critical(self.window, "Error", f"Failed to create file:\n{str(e)}")
-            self.generalUI.update_info_log(f"Failed to create file: {save_path}", level="ERROR")
+            self.generalUI.update_info_log(f"Failed to create file: {save_path} - {str(e)}", level="ERROR")
             return None, None
 
     def handle_create_file(self):
         """
-        Only create file and save json file, hold on tab Create.
+        Create and save the JSON test file while remaining on the Create tab.
         """
         save_path, _ = self.build_and_save_json()
         if save_path:
@@ -134,7 +168,7 @@ class CreateTestUI:
 
     def handle_start_testing(self):
         """
-        Lưu file JSON, sau đó tự động chuyển thẳng sang tab Testing và nạp sẵn dữ liệu để test.
+        Save the JSON file, then automatically switch to the Testing tab and load the data.
         """
         save_path, test_data = self.build_and_save_json()
         if not save_path or not test_data:
@@ -145,14 +179,7 @@ class CreateTestUI:
             self.generalUI.update_info_log(f"No Samples Found: {save_path}", level="WARNING")
             return
 
-        # Update result table 
-        if hasattr(self.generalUI, "refresh_table"):
-            self.generalUI.testing_ui.refresh_table()  # Cập nhật bảng kết quả với dữ liệu mới
-
-        # Chuyển sang tab Testing (index 2) và nạp mẫu đầu tiên lên form
-        self.generalUI.tab_widget.setCurrentIndex(2)
+        # Start session: switches to Testing tab, populates Result table, and loads the first element
         self.generalUI.testing_ui.start_session(save_path, test_data)
-        self.generalUI.testing_ui.load_element_to_form(0)
-        
         self.generalUI.update_test_information(test_data)
         self.generalUI.update_info_log(f"Created and started test: {save_path}", level="INFO")

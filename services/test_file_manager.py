@@ -43,7 +43,8 @@ class TestFileManager:
                 "sample_date": info_data.get("sample_date", ""),
                 "remark": info_data.get("remark", ""),
                 "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "status": "Created"
+                "status": "Created",
+                "finished_at": ""
             },
             "elements": elements_list
         }

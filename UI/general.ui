@@ -74,7 +74,7 @@ qproperty-alignment: 'AlignCenter';
      </property>
     </widget>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="progress_bar">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -1487,6 +1487,9 @@ qproperty-alignment: 'AlignCenter';
          <height>26</height>
         </rect>
        </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QDateEdit" name="date_to">
        <property name="geometry">
@@ -1496,6 +1499,9 @@ qproperty-alignment: 'AlignCenter';
          <width>126</width>
          <height>26</height>
         </rect>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QLabel" name="label_16">
@@ -1524,7 +1530,7 @@ qproperty-alignment: 'AlignCenter';
         <string>To</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="fillter_btn">
+      <widget class="QPushButton" name="filter_btn">
        <property name="geometry">
         <rect>
          <x>630</x>
@@ -1534,7 +1540,7 @@ qproperty-alignment: 'AlignCenter';
         </rect>
        </property>
        <property name="text">
-        <string>Fillter</string>
+        <string>Filter</string>
        </property>
       </widget>
      </widget>

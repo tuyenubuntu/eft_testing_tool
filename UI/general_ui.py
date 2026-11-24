@@ -7,7 +7,7 @@ import atexit
 import signal
 import getpass
 from typing import Optional, Set
-from PySide6.QtWidgets import QApplication,QTabWidget, QPushButton, QTabWidget, QPlainTextEdit,QWidget, QTableView, QTableWidget, QTableWidgetItem, QProgressBar, QTextEdit, QLabel, QMessageBox, QPlainTextEdit, QLineEdit, QDialog, QVBoxLayout, QComboBox
+from PySide6.QtWidgets import QApplication,QTabWidget, QDateEdit, QPushButton, QTabWidget, QPlainTextEdit,QWidget, QTableView, QTableWidget, QTableWidgetItem, QProgressBar, QTextEdit, QLabel, QMessageBox, QPlainTextEdit, QLineEdit, QDialog, QVBoxLayout, QComboBox
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, Qt, QFileSystemWatcher, QObject, Signal,QTimer, QIODevice
 from PySide6.QtGui import QIcon, QTextCursor
@@ -15,6 +15,7 @@ from ui.create_test_ui import CreateTestUI
 from ui.load_test_ui import LoadTestUI
 from ui.testing_ui import TestingUI
 from ui.data_ui import DataUI
+from ui.test_order_ui import TestOrderUI
 from ui.accountmanager_ui import AccountManagerUI
 from services.config_reader import ConfigReader
 from services.log_services import LogServices
@@ -39,7 +40,7 @@ class GeneralUI(QApplication):
         self.testing_ui = TestingUI(self.window, self)
         self.data_ui = DataUI(self.window, self)
         self.log_services = LogServices(save_to_file=True)
-        
+        self.test_order_ui = TestOrderUI(self.window, self)
         
         
           # Bind widgets after the UI is loaded
@@ -117,6 +118,12 @@ class GeneralUI(QApplication):
         self.close_btn_2 = self.window.findChild(QPushButton, "close_btn_2")
         self.finish_btn_2 = self.window.findChild(QPushButton, "finish_btn_2")
 
+        # Binding widget to class attribute  | Test Order tab
+        self.date_from = self.window.findChild(QDateEdit, "date_from")
+        self.date_to = self.window.findChild(QDateEdit, "date_to")
+        self.filter_btn = self.window.findChild(QPushButton, "filter_btn")
+        self.table_orders = self.window.findChild(QWidget, "table_orders")
+
         #Widget
         self.create_tab           = self.window.findChild(QWidget, "create_tab") #0
         self.load_tab           = self.window.findChild(QWidget, "load_tab") #1
@@ -156,6 +163,10 @@ class GeneralUI(QApplication):
             self.change_user_btn.clicked.connect(self.account_manager.open_general_login)
         if self.admin_btn:
             self.admin_btn.clicked.connect(self.account_manager.open_login_then_admin)
+
+        #Set up Progress bar
+        self.progress_bar.setRange(0, 100)
+        self.progress_bar.setValue(0)
             
     def load_ui(self, ui_file_path):
         ui_file = QFile(ui_file_path)
@@ -168,25 +179,30 @@ class GeneralUI(QApplication):
 
         # --- role-based permission for any tab ---
     def _apply_tab_permission(self, role: str, user: str):
-        # self.generalUI.tab_widget
-        # if self.idx_cam < 0 or not self.tab:
-        #     return
-        # self.enable_role = (role != "operator")
-        # # If the role is restricted and the user is on the cam/monitor tab -> switch to inspection
-        # if not self.enable_role and self.tab.currentIndex() in (self.idx_cam, self.idx_test, self.idx_monitor, self.idx_setting):
-        #     if self.idx_ins >= 0:
-        #         self.tab.setCurrentIndex(self.idx_ins)
-        # # Update enable/disable for tab
-        # if self.window and not self.window.isHidden():
-        #     self.tab.setTabEnabled(self.idx_cam, self.enable_role)
-        #     self.tab.setTabEnabled(self.idx_monitor, self.enable_role)
-        #     self.tab.setTabEnabled(self.idx_test, self.enable_role)
-        #     # self.tab.setTabEnabled(self.idx_setting, self.enable_role)
         if role == "administrator" and user == "administrator":
             self.tab_widget.setTabEnabled(5, True)
         else:
             self.tab_widget.setTabEnabled(5, False)
             self.tab_widget.setCurrentIndex(0)
+
+    def update_progress_bar(self, test_data=None):
+        """Calculate and update QProgressBar based on completed elements (0% if no active test)."""
+        if not getattr(self, "progress_bar", None):
+            return
+
+        if not test_data or "elements" not in test_data:
+            self.progress_bar.setValue(0)
+            return
+
+        elements = test_data.get("elements", [])
+        total = len(elements)
+        if total == 0:
+            self.progress_bar.setValue(0)
+            return
+
+        completed = sum(1 for el in elements if str(el.get("result", "")).strip())
+        percent = int((completed / total) * 100)
+        self.progress_bar.setValue(percent)
 
     
     def update_test_information(self, test_data):
@@ -217,7 +233,9 @@ class GeneralUI(QApplication):
             f"Requester: {self.info.get('requester_by', '')}\n"
             f"Sample Date: {self.info.get('sample_date', '')}\n"
             f"Progress: {completed_count} / {total_count}\n"
+            f"Created at: {self.info.get('created_at', '')}\n"
             f"Status: {self.info.get('status', '')}\n"
+            f"Finished at: {self.info.get('finished_at', '')}\n"
             f"Remark: {self.info.get('remark', '')}"
         )
 

@@ -1,0 +1,40 @@
+# ==========================================
+# 1. Môi trường ảo & IDE (Python / Conda / VS Code)
+# ==========================================
+.conda/
+.venv/
+venv/
+env/
+.vscode/
+.idea/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================================
+# 2. Thư mục đóng gói PyInstaller
+# ==========================================
+build/
+dist/
+*.exe
+# Giữ lại app.spec nếu muốn dùng lại cấu hình build, hoặc bỏ comment dòng dưới nếu muốn ignore luôn:
+# *.spec
+
+# ==========================================
+# 3. Dữ liệu test & Log vận hành của ứng dụng
+# ==========================================
+app_logs/
+log/
+LOG_v03/
+*.log
+
+# ==========================================
+# 4. File tạm của hệ điều hành (Windows)
+# ==========================================
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak

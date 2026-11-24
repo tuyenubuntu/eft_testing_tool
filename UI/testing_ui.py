@@ -66,7 +66,8 @@ class TestingUI:
 
         # Disable the submit button until a valid element is loaded
         self.refresh_table()
-        print ("First refesh")
+        self.generalUI.update_progress_bar(self.test_data)
+        # print ("First refesh")
 
         # find the first element that has no result yet and load it into the form
         elements = self.test_data.get("elements", [])
@@ -184,7 +185,8 @@ class TestingUI:
             TestFileManager.save_test_json(self.json_path, self.test_data)
             self.refresh_table()
             self.generalUI.update_test_information(self.test_data)
-            print("Test1")
+            self.generalUI.update_progress_bar(self.test_data)
+            # print("Test1")
 
             # Step 3: Move to the next element for testing
             next_index = self.current_index + 1
@@ -215,9 +217,11 @@ class TestingUI:
                 return
 
         self.test_data["test_info"]["status"] = "Finished"
+        self.test_data["test_info"]["finished_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         TestFileManager.save_test_json(self.json_path, self.test_data)
         QMessageBox.information(self.window, "Completed", "Test batch marked as finished!")
         self.reset_testing_ui()
+        self.generalUI.update_progress_bar(None)
         
         # Optional: Log the closure of the test session in the information log if it exists
         if hasattr(self.generalUI, "textEdit_Information") and self.generalUI.textEdit_Information:
@@ -277,6 +281,7 @@ class TestingUI:
         )
         if reply == QMessageBox.Yes:
             self.reset_testing_ui()
+            self.generalUI.update_progress_bar(None)
 
             # Optional: Log the closure of the test session in the information log if it exists
             if hasattr(self.generalUI, "textEdit_Information") and self.generalUI.textEdit_Information:
