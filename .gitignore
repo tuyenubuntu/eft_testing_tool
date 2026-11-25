@@ -21,7 +21,7 @@ build/
 dist/
 *.exe
 # Giữ lại app.spec nếu muốn dùng lại cấu hình build, hoặc bỏ comment dòng dưới nếu muốn ignore luôn:
-# *.spec
+*.spec
 
 # ==========================================
 # 3. Dữ liệu test & Log vận hành của ứng dụng

@@ -291,6 +291,6 @@ class GeneralUI(QApplication):
     
     def run(self):
         self.update_info_log(f"Start: EFT Creating Tool", level="INFO")
-        self.update_info_log(f"User online: {self.user_online}", level="INFO")
+        self.update_info_log(f"Online user: {self.user_online}", level="INFO")
         self.window.show()
         sys.exit(self.app.exec())

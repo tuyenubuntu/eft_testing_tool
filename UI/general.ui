@@ -1571,7 +1571,7 @@ qproperty-alignment: 'AlignCenter';
         </rect>
        </property>
        <property name="text">
-        <string>Fillter</string>
+        <string>Filter</string>
        </property>
       </widget>
       <widget class="QComboBox" name="input_eft_machine_2">
