@@ -68,7 +68,8 @@ class GeneralUI(QApplication):
         self.input_axis = self.window.findChild(QComboBox, "input_axis")
         self.input_requester = self.window.findChild(QComboBox, "input_requester")
         self.input_quantity = self.window.findChild(QLineEdit, "input_quantity")
-        self.input_sample_date = self.window.findChild(QLineEdit, "input_sample_date")
+        # self.input_sample_date = self.window.findChild(QLineEdit, "input_sample_date")
+        self.input_sample_date = self.window.findChild(QDateEdit, "input_sample_date")
         self.input_remark = self.window.findChild(QPlainTextEdit, "input_remark")
         self.start_test_btn_1 = self.window.findChild(QPushButton, "start_test_btn_1")
         self.information_log = self.window.findChild(QPlainTextEdit, "information_log")
@@ -111,6 +112,10 @@ class GeneralUI(QApplication):
         self.close_btn = self.window.findChild(QPushButton, "close_btn")
         self.finish_btn = self.window.findChild(QPushButton, "finish_btn")
         self.table_results = self.window.findChild(QTableView, "table_results")
+        # Map result folder & Get cycles widgets on Testing tab
+        self.load_path_result = self.window.findChild(QLineEdit, "load_path_result")
+        self.browse_btn_2 = self.window.findChild(QPushButton, "browse_btn_2")
+        self.get_cycles_btn = self.window.findChild(QPushButton, "get_cycles_btn")
         
         # Binding widgets to class attributes | Data tab
         

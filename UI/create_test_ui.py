@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from PySide6.QtWidgets import QWidget, QFileDialog, QMessageBox
-
+from PySide6.QtCore import QDate, Qt
 from services.config_reader import ConfigReader
 from services.test_file_manager import TestFileManager
 
@@ -40,22 +40,37 @@ class CreateTestUI:
         # Pre-fill current date for Sample Date if the field is empty
         if not self.generalUI.input_sample_date.text().strip():
             self.generalUI.input_sample_date.setText(datetime.now().strftime("%d/%m/%Y"))
+        
+        current_year = datetime.now().year
+        current_month = datetime.now().month
+        current_day = datetime.now().day
+        if self.generalUI.input_sample_date:
+            self.generalUI.input_sample_date.setDisplayFormat("yyyy-MM-dd")
+            self.generalUI.input_sample_date.setCalendarPopup(True)
+            self.generalUI.input_sample_date.setDate(QDate.currentDate())
 
         self.generalUI.create_btn.clicked.connect(self.handle_create_file)
         self.generalUI.start_test_btn_1.clicked.connect(self.handle_start_testing)
 
-    def _parse_sample_date(self, date_str):
+    def _parse_sample_date(self, date_val):
         """
-        Parse common date formats (dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd, yymmdd)
-        and return (year_yyyy, yymmdd).
+        Convert a QDate object (or fallback date string) and return (year_yyyy, yymmdd).
         """
-        formats = ["%d/%m/%Y", "%d-%m-%Y", "%Y-%m-%d", "%Y/%m/%d", "%d/%m/%y", "%y%m%d"]
-        for fmt in formats:
-            try:
-                dt = datetime.strptime(date_str, fmt)
-                return dt.strftime("%Y"), dt.strftime("%y%m%d")
-            except ValueError:
-                continue
+        if isinstance(date_val, QDate):
+            if not date_val.isValid():
+                return None, None
+            return date_val.toString("yyyy"), date_val.toString("yyMMdd")
+
+        # Fallback if a string is passed
+        if isinstance(date_val, str):
+            formats = ["%d/%m/%Y", "%d-%m-%Y", "%Y-%m-%d", "%Y/%m/%d", "%d/%m/%y", "%y%m%d"]
+            for fmt in formats:
+                try:
+                    dt = datetime.strptime(date_val.strip(), fmt)
+                    return dt.strftime("%Y"), dt.strftime("%y%m%d")
+                except ValueError:
+                    continue
+
         return None, None
 
     def build_and_save_json(self):
@@ -87,7 +102,8 @@ class CreateTestUI:
             self.generalUI.update_info_log("Missing Information: Please enter the Sample Date!", level="WARNING")
             return None, None
 
-        year_yyyy, yymmdd = self._parse_sample_date(sample_date)
+        qdate_val = self.generalUI.input_sample_date.date()
+        year_yyyy, yymmdd = self._parse_sample_date(qdate_val)
         if not year_yyyy or not yymmdd:
             QMessageBox.warning(
                 self.window,
@@ -96,6 +112,7 @@ class CreateTestUI:
             )
             self.generalUI.update_info_log(f"Invalid Sample Date format: {sample_date}", level="WARNING")
             return None, None
+        sample_date_str = qdate_val.toString("dd/MM/yyyy")
 
         element_type = self.generalUI.input_element_type.currentText().strip()
         line = self.generalUI.input_line.currentText().strip()

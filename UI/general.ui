@@ -7,18 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>956</width>
-    <height>616</height>
+    <height>622</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>956</width>
-    <height>600</height>
+    <height>622</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>960</width>
+    <width>956</width>
     <height>622</height>
    </size>
   </property>
@@ -567,16 +567,6 @@ qproperty-alignment: 'AlignCenter';
        <string>Remark</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="input_sample_date">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>160</y>
-        <width>191</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
@@ -647,6 +637,19 @@ qproperty-alignment: 'AlignCenter';
       </property>
       <property name="text">
        <string>START TEST</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="input_sample_date">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>160</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -857,16 +860,6 @@ qproperty-alignment: 'AlignCenter';
        <string>Process</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="load_sample_date">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>160</y>
-        <width>191</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_50">
       <property name="geometry">
        <rect>
@@ -1060,6 +1053,16 @@ qproperty-alignment: 'AlignCenter';
        <string>Monitor</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="load_sample_date">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>160</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="testing_tab">
      <attribute name="title">
@@ -1118,7 +1121,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>220</y>
+        <y>210</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1136,7 +1139,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>60</y>
+        <y>50</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1154,7 +1157,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>260</y>
+        <y>250</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1172,7 +1175,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>180</y>
+        <y>170</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1192,7 +1195,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>60</y>
+        <y>50</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1202,7 +1205,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>220</y>
+        <y>210</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1247,7 +1250,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>180</y>
+        <y>170</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1265,7 +1268,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>100</y>
+        <y>90</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1283,7 +1286,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>140</y>
+        <y>130</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1301,7 +1304,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>140</y>
+        <y>130</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1324,7 +1327,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>100</y>
+        <y>90</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1334,9 +1337,9 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>260</y>
+        <y>250</y>
         <width>121</width>
-        <height>71</height>
+        <height>31</height>
        </rect>
       </property>
      </widget>
@@ -1344,7 +1347,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>20</y>
+        <y>10</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -1357,7 +1360,7 @@ qproperty-alignment: 'AlignCenter';
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>10</y>
         <width>111</width>
         <height>31</height>
        </rect>
@@ -1382,6 +1385,50 @@ qproperty-alignment: 'AlignCenter';
       </property>
       <property name="text">
        <string>Get cycles</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="browse_btn_2">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>300</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset theme="document-open"/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="load_path_result">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>300</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="test_remark_lb_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>300</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Map result</string>
       </property>
      </widget>
     </widget>
@@ -1414,7 +1461,7 @@ qproperty-alignment: 'AlignCenter';
       <widget class="QPushButton" name="close_btn_2">
        <property name="geometry">
         <rect>
-         <x>470</x>
+         <x>390</x>
          <y>10</y>
          <width>81</width>
          <height>41</height>
@@ -1427,7 +1474,7 @@ qproperty-alignment: 'AlignCenter';
       <widget class="QPushButton" name="finish_btn_2">
        <property name="geometry">
         <rect>
-         <x>550</x>
+         <x>470</x>
          <y>10</y>
          <width>81</width>
          <height>41</height>
@@ -1440,7 +1487,7 @@ qproperty-alignment: 'AlignCenter';
       <widget class="QPushButton" name="finish_btn_3">
        <property name="geometry">
         <rect>
-         <x>630</x>
+         <x>550</x>
          <y>10</y>
          <width>81</width>
          <height>41</height>
@@ -1448,6 +1495,19 @@ qproperty-alignment: 'AlignCenter';
        </property>
        <property name="text">
         <string>Export</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="print_result_btn">
+       <property name="geometry">
+        <rect>
+         <x>630</x>
+         <y>10</y>
+         <width>81</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Print result</string>
        </property>
       </widget>
      </widget>

@@ -9,6 +9,7 @@ from PySide6.QtWidgets import QComboBox, QTextEdit, QPushButton, QLabel, QTableW
 
 from services.config_reader import ConfigReader
 from services.test_file_manager import TestFileManager
+from services.result_reader import ResultReader
 
 
 class TestingUI:
@@ -54,6 +55,17 @@ class TestingUI:
             self.generalUI.finish_btn.clicked.connect(self.handle_finish)
         if self.generalUI.close_btn:
             self.generalUI.close_btn.clicked.connect(self.handle_close)
+            
+        if self.generalUI.load_path_result:
+            self.generalUI.load_path_result.setReadOnly(True)
+            self.generalUI.load_path_result.textChanged.connect(self.on_result_path_changed)
+
+        if self.generalUI.browse_btn_2:
+            self.generalUI.browse_btn_2.clicked.connect(self.handle_browse_result_folder)
+
+        if self.generalUI.get_cycles_btn:
+            self.generalUI.get_cycles_btn.setEnabled(False)  # Disabled until result folder is mapped
+            self.generalUI.get_cycles_btn.clicked.connect(self.handle_get_cycles)
 
     def start_session(self, json_path, test_data):
         """Function to start a testing session with the provided JSON path and test data."""
@@ -270,6 +282,11 @@ class TestingUI:
 
         if self.generalUI.information_test:
             self.generalUI.information_test.clear()
+            
+        if self.generalUI.load_path_result:
+            self.generalUI.load_path_result.clear()
+        if self.generalUI.get_cycles_btn:
+            self.generalUI.get_cycles_btn.setEnabled(False)
 
     def handle_close(self):
         """Close the current test session: clear data on the UI and return to the Create tab, without closing the app"""
@@ -290,3 +307,77 @@ class TestingUI:
             # # Switch the screen back to the Create tab (index 0) or Load test tab (index 1)
             # if self.generalUI.tab_widget:
             #     self.generalUI.tab_widget.setCurrentIndex(0)
+    
+    def on_result_path_changed(self, text: str):
+        """Enable 'Get cycles' button only when a valid result folder path is mapped."""
+        has_valid_folder = bool(text.strip()) and os.path.isdir(text.strip())
+        if self.generalUI.get_cycles_btn:
+            self.generalUI.get_cycles_btn.setEnabled(has_valid_folder)
+
+    def handle_browse_result_folder(self):
+        """Open dialog to select the machine result folder and validate Charge No. match."""
+        if not self.test_data:
+            QMessageBox.warning(self.window, "No Active Test", "Please create or load a test order first!")
+            return
+
+        folder_path = QFileDialog.getExistingDirectory(
+            self.window,
+            "Select Machine Result Folder",
+            ""
+        )
+        if not folder_path:
+            return
+
+        expected_charge_no = self.test_data.get("test_info", {}).get("charge_no", "")
+        is_valid, err_msg = ResultReader.validate_result_folder(folder_path, expected_charge_no)
+
+        if not is_valid:
+            QMessageBox.critical(self.window, "Wrong Result Folder", err_msg)
+            if self.generalUI.load_path_result:
+                self.generalUI.load_path_result.clear()
+            if hasattr(self.generalUI, "update_info_log"):
+                self.generalUI.update_info_log(
+                    f"Rejected result folder '{os.path.basename(folder_path)}' (Expected Charge No.: {expected_charge_no})",
+                    level="ERROR"
+                )
+            return
+
+        if self.generalUI.load_path_result:
+            self.generalUI.load_path_result.setText(folder_path)
+        if hasattr(self.generalUI, "update_info_log"):
+            self.generalUI.update_info_log(f"Mapped result folder: {folder_path}", level="INFO")
+
+    def handle_get_cycles(self):
+        """Fetch the final cycles for the current element after verifying Charge No. match."""
+        if not self.test_data:
+            return
+
+        folder_path = self.generalUI.load_path_result.text().strip() if self.generalUI.load_path_result else ""
+        expected_charge_no = self.test_data.get("test_info", {}).get("charge_no", "")
+
+        is_valid, err_msg = ResultReader.validate_result_folder(folder_path, expected_charge_no)
+        if not is_valid:
+            QMessageBox.critical(self.window, "Wrong Result Folder", err_msg)
+            return
+
+        current_el = self.test_data["elements"][self.current_index]
+        element_no = int(current_el.get("element_no", self.current_index + 1))
+
+        try:
+            cycles_val = ResultReader.get_cycles_from_folder(
+                folder_path=folder_path,
+                element_no=element_no,
+                machine_type="TYPE_1"
+            )
+            self.generalUI.cycles.setText(cycles_val)
+
+            if hasattr(self.generalUI, "update_info_log"):
+                self.generalUI.update_info_log(
+                    f"Fetched {cycles_val} cycles for Element #{element_no} from {element_no}.Woe",
+                    level="SUCCESS"
+                )
+
+        except Exception as e:
+            QMessageBox.warning(self.window, "Get Cycles Failed", str(e))
+            if hasattr(self.generalUI, "update_info_log"):
+                self.generalUI.update_info_log(f"Get cycles error (Element #{element_no}): {str(e)}", level="ERROR")
