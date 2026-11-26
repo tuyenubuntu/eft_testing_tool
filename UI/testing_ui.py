@@ -287,6 +287,9 @@ class TestingUI:
             self.generalUI.load_path_result.clear()
         if self.generalUI.get_cycles_btn:
             self.generalUI.get_cycles_btn.setEnabled(False)
+        if self.generalUI.result_folder:
+            self.generalUI.result_folder.setText(f"Result folder: Offline" )
+            self.generalUI.result_folder.setStyleSheet("color: orange;")
 
     def handle_close(self):
         """Close the current test session: clear data on the UI and return to the Create tab, without closing the app"""
@@ -340,12 +343,20 @@ class TestingUI:
                     f"Rejected result folder '{os.path.basename(folder_path)}' (Expected Charge No.: {expected_charge_no})",
                     level="ERROR"
                 )
+            if self.generalUI.result_folder:
+                self.generalUI.result_folder.setText(f"Result folder: Offline" )
+                self.generalUI.result_folder.setStyleSheet("color: orange;")
+            
             return
 
         if self.generalUI.load_path_result:
             self.generalUI.load_path_result.setText(folder_path)
         if hasattr(self.generalUI, "update_info_log"):
             self.generalUI.update_info_log(f"Mapped result folder: {folder_path}", level="INFO")
+
+        if self.generalUI.result_folder:
+            self.generalUI.result_folder.setText(f"Result folder: Online" )
+            self.generalUI.result_folder.setStyleSheet("color: green;")
 
     def handle_get_cycles(self):
         """Fetch the final cycles for the current element after verifying Charge No. match."""

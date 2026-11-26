@@ -77,6 +77,7 @@ class GeneralUI(QApplication):
         self.tab_widget = self.window.findChild(QTabWidget, "tabWidget")
         self.information_test = self.window.findChild(QPlainTextEdit, "information_test")
         self.user_name = self.window.findChild(QLabel, "user_name")
+        self.result_folder = self.window.findChild(QLabel, "result_folder")
         self.change_user_btn = self.window.findChild(QPushButton, "change_user_btn")
         self.admin_btn = self.window.findChild(QPushButton, "admin_btn")
         
@@ -122,6 +123,11 @@ class GeneralUI(QApplication):
         self.table_results_2 = self.window.findChild(QTableView, "table_results_2")
         self.close_btn_2 = self.window.findChild(QPushButton, "close_btn_2")
         self.finish_btn_2 = self.window.findChild(QPushButton, "finish_btn_2")
+        self.tabWidget_3 = self.window.findChild(QTabWidget, "tabWidget_3")
+        self.widget_analysis = self.window.findChild(QWidget, "widget_analysis")
+        self.analysis_btn = self.window.findChild(QPushButton, "analysis_btn")
+        self.save_fig_btn = self.window.findChild(QPushButton, "save_fig_btn")
+        self.export_btn = self.window.findChild(QPushButton, "export_btn")
 
         # Binding widget to class attribute  | Test Order tab
         self.date_from = self.window.findChild(QDateEdit, "date_from")
@@ -163,6 +169,9 @@ class GeneralUI(QApplication):
         if self.user_name:
             self.user_name.setText(f"Online user: {self.user_online}" )
             self.user_name.setStyleSheet("color: green;")
+        if self.result_folder:
+            self.result_folder.setText(f"Result folder: Offline" )
+            self.result_folder.setStyleSheet("color: orange;")
 
         if self.change_user_btn:
             self.change_user_btn.clicked.connect(self.account_manager.open_general_login)
@@ -250,7 +259,7 @@ class GeneralUI(QApplication):
 
         elif hasattr(self.information_test, "setText"):
             self.information_test.setText(self.summary_text)
-        self.update_info_log(f"Loaded test information", level="INFO")
+        # self.update_info_log(f"Loaded test information", level="INFO")
 
     def update_info_log(self, message, level="INFO"):
         """

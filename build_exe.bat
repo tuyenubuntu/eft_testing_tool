@@ -1,2 +1,3 @@
 @REM  conda activate yolo_env
-pyinstaller --noconsole --onefile --icon="ui/ICO.png" --add-data "ui/Bosch-Logo.png;ui" --add-data "ui/ICO.png;ui" --add-data "ui/main.ui;ui" app.py
+pyinstaller --noconsole --onefile --name="EFT Tracking Tool" --icon="ui/ICO.png" --add-data "ui/Bosch-Logo.png;ui" --add-data "ui/ICO.png;ui" --add-data "ui/general.ui;ui" app.py
+pyinstaller --noconsole --onefile --name="EFT Tracking Tool V2" --icon="ui/ICO.png" --add-data "ui/Bosch-Logo.png;ui" --add-data "ui/ICO.png;ui" --add-data "ui/general.ui;ui" --hidden-import="matplotlib.backends.backend_qtagg" --hidden-import="openpyxl" app.py
